@@ -4,6 +4,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+
+import com.ProyectoPracticas.demo.usuarios.entidades.RolEntity;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(name = "UsuarioDTO", description = "Datos para crear o actualizar un usuario")
@@ -26,9 +29,15 @@ public class UsuarioDTO {
     @NotNull(message = "Apellidos requerido")
     @NotBlank(message = "Apellidos no pueden estar vacío")
     private String apellido;
+    
+    
+    @Schema(description = "Rol del usuario (ADMIN, PROFESOR, USUARIO)", example = "USUARIO")
+    @NotNull(message = "El rol es obligatorio")
+    private RolEntity rol;
+
 
     public UsuarioDTO() {
-    }
+}
 
     public String getCorreo() {
         return correo;
@@ -52,5 +61,14 @@ public class UsuarioDTO {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+    
+    
+    public RolEntity getRol() {
+		return rol;
+	}
+    
+    public void setRol(RolEntity rol) {
+    	this.rol = rol;
     }
 }

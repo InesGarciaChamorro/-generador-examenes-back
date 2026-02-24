@@ -1,9 +1,9 @@
 package com.ProyectoPracticas.demo.usuarios.entidades;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
+import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class UsuarioEntity {
@@ -13,11 +13,20 @@ public class UsuarioEntity {
     private String nombre;
     private String apellido;
     private String correo;
+    
+    @JsonIgnore
     private String contrasena;
 
+    @Enumerated(EnumType.STRING)
+    private RolEntity rol;
+    
+    
+    private boolean activo;
+
+    
     // Getters y setters
     public UsuarioEntity() {
-    }
+}
 
     public Long getId() {
         return id;
@@ -31,9 +40,11 @@ public class UsuarioEntity {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+
+    public void setNombre(String nombre) { 
+    	this.nombre = nombre; 
     }
+
     
     public String getApellido() {
         return apellido;
@@ -59,4 +70,20 @@ public class UsuarioEntity {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+    
+    public RolEntity getRol() {
+		return rol;
+	}
+    
+    public void setRol(RolEntity rol) {
+    	this.rol = rol;
+    }
+    
+    public boolean isActivo() {
+		return activo;
+	}
+    
+    public void setActivo(boolean activo) {
+		this.activo = activo;
+	}	
 }
