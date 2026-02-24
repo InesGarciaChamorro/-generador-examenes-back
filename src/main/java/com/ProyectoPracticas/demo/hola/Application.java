@@ -1,4 +1,4 @@
-package com.ProyectoPracticas.demo;
+package com.ProyectoPracticas.demo.hola;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
