@@ -2,8 +2,8 @@ package com.ProyectoPracticas.demo.usuarios.entidades;
 
 
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -12,88 +12,99 @@ public class UsuarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    @JsonProperty("id_usuario")
-    private Long id_usuario;
+    private Long idUsuario;
     
     
     @Column(name = "nombre_usuario", nullable = false)
-    @JsonProperty("nombre_usuario")
-    private String nombre_usuario;
+    private String nombreUsuario;
     
     
     @Column(name = "apellido_usuario", nullable = false)
-    @JsonProperty("apellido_usuario")
-    private String apellido_usuario;
+    private String apellidoUsuario;
     
     
     @Column(name = "correo_usuario", nullable = false, unique = true)
-    @JsonProperty("correo_usuario")
-    private String correo_usuario;
+    private String correoUsuario;
     
     @Column(name = "contrasenha_usuario", nullable = false)
-    @JsonProperty(value = "contrasenha_usuario", access = JsonProperty.Access.WRITE_ONLY)
-    private String contrasenha_usuario;
+    private String contrasenhaUsuario;
     
     
     @Column(name = "activo", nullable = false)
-    @JsonProperty("activo")
-    private boolean activo = true;
+    private int activo = 1;
     
     
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "usuarios_roles",
+        joinColumns = @JoinColumn(name = "id_usuario"),
+        inverseJoinColumns = @JoinColumn(name = "id_rol")
+    )
+    private Set<RolEntity> conjuntoRoles = new HashSet<>();
+    
+       
     // Getters y setters
     public UsuarioEntity() {
 }
 
-    public Long getId_usuario() {
-        return id_usuario;
+    public Long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId_usuario(Long id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getNombre_usuario() {
-        return nombre_usuario;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
 
-    public void setNombre_usuario(String nombre_usuario) { 
-    	this.nombre_usuario = nombre_usuario; 
+    public void setNombreUsuario(String nombreUsuario) { 
+    	this.nombreUsuario = nombreUsuario; 
     }
 
     
-    public String getApellido_usuario() {
-        return apellido_usuario;
+    public String getApellidoUsuario() {
+        return apellidoUsuario;
     }
 
-    public void setApellido_usuario(String apellido_usuario) {
-        this.apellido_usuario = apellido_usuario;
+    public void setApellidoUsuario(String apellidoUsuario) {
+        this.apellidoUsuario = apellidoUsuario;
     }
 
 
-    public String getCorreo_usuario() {
-        return correo_usuario;
+    public String getCorreoUsuario() {
+        return correoUsuario;
     }
 
-    public void setCorreo_usuario(String correo_usuario) {
-        this.correo_usuario = correo_usuario;
+    public void setCorreoUsuario(String correoUsuario) {
+        this.correoUsuario = correoUsuario;
     }
     
-    public String getContrasenha_usuario() {
-        return contrasenha_usuario;
+    public String getContrasenhaUsuario() {
+        return contrasenhaUsuario;
     }
 
-    public void setContrasenha_usuario(String contrasenha_usuario) {
-        this.contrasenha_usuario = contrasenha_usuario;
+    public void setContrasenhaUsuario(String contrasenhaUsuario) {
+        this.contrasenhaUsuario = contrasenhaUsuario;
     }
     
-    public boolean getActivo() {
+    public int getActivo() {
 		return activo;
 	}
     
-    public void setActivo(boolean activo) {
-		this.activo = activo;
+    public void setActivo(int activo) {
+    	this.activo = activo;
 	}	
     
+    
+    public Set<RolEntity> getConjuntoRoles() {
+		return conjuntoRoles;
+	}
+
+	public void setConjuntoRoles(Set<RolEntity> conjuntoRoles) {
+		this.conjuntoRoles = conjuntoRoles;
+	}
     
 }

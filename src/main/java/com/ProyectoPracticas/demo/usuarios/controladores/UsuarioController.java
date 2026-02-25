@@ -44,7 +44,7 @@ public class UsuarioController {
 	@Operation(summary = "Listar usuarios", description = "Devuelve la lista completa de usuarios registrados en el sistema")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Lista de usuarios obtenida exitosamente", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UsuarioEntity.class)))) })
-	public List<UsuarioEntity> listar() {
+	public List<UsuarioDTO> listar() {
 		return service.listar();
 	}
 
@@ -61,16 +61,12 @@ public class UsuarioController {
 		}
 	}
 
-	/*@GetMapping("/{nombre_usuario}")
-	public UsuarioEntity obtenerPorNombre(@PathVariable String nombre_usuario) {
-		return service.obtenerPorNombre(nombre_usuario);
-	}*/
 
 	// Crea usuario
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@Operation(summary = "Crear usuario")
-	public UsuarioEntity crear(@Valid @RequestBody UsuarioDTO dto) {
+	public UsuarioDTO crear(@Valid @RequestBody UsuarioDTO dto) {
 		return service.crear(dto);
 	}
 
@@ -79,26 +75,9 @@ public class UsuarioController {
 	@Operation(summary = "Actualizar usuario", description = "Solo el admin puede actualizar el rol de un usuario. El resto de campos pueden ser actualizados por cualquier rol.")
 	public ResponseEntity<UsuarioEntity> actualizar(@PathVariable Long id,
 			@RequestBody(required = false) UsuarioDTO dto,
-			@RequestHeader(name = "Rol", required = false, defaultValue = "Usuario") String rol) {
-
-		if (dto == null) {
-			return ResponseEntity.badRequest().build();
-		}
-
-		RolEntity rolEnum;
-
-		try {
-			rolEnum = RolEntity.valueOf(rol.toUpperCase());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
-
-		try {
-			UsuarioEntity usuarioActualizado = service.actualizar(id, dto, rolEnum);
-			return ResponseEntity.ok(usuarioActualizado);
-		} catch (RuntimeException e) {
-			return ResponseEntity.notFound().build();
-		}
+			@RequestHeader(name = "Rol", required = false, defaultValue = "USUARIO") String rol) {
+		UsuarioDTO actualizado = service.actualizar(id, dto, rol.toUpperCase());
+		return ResponseEntity.ok(actualizado);
 	}
 
 	// Elimina usuario

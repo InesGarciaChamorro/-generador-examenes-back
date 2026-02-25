@@ -2,6 +2,7 @@ package com.ProyectoPracticas.demo.usuarios.services;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,54 +17,60 @@ public class UsuarioServiceImplementado implements UsuarioService {
 	@Autowired
 	private UsuarioRepository repo;
 	
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	@Override
-	public List<UsuarioEntity> listar() {
-		return repo.findAll().stream().filter(UsuarioEntity::getActivo).toList();
+	public List<UsuarioDTO> listar() {
+		return repo.findAll().stream()
+				.map(usuario -> modelMapper.map(usuario, UsuarioDTO.class))
+				.toList();
 	}
 
 	@Override
-	public UsuarioEntity obtenerPorId(Long id) {
-		return repo.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+	public UsuarioDTO obtenerPorId(Long id) {
+		UsuarioEntity entity =repo.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+		return modelMapper.map(entity, UsuarioDTO.class);
 	}
 
 	@Override
-	public UsuarioEntity crear(UsuarioDTO dto) {
+	public UsuarioDTO crear(UsuarioDTO dto) {
 		UsuarioEntity usuario = new UsuarioEntity();
-		usuario.setNombre_usuario(dto.getNombre_usuario());
-		usuario.setApellido_usuario(dto.getApellido_usuario());	
-		usuario.setCorreo_usuario(dto.getCorreo_usuario());
-		usuario.setContrasenha_usuario(dto.getContrasenha_usuario());
-		usuario.setActivo(true);
-		return repo.save(usuario);	
+		usuario.setNombreUsuario(dto.getNombreUsuario());
+		usuario.setApellidoUsuario(dto.getApellidoUsuario());	
+		usuario.setCorreoUsuario(dto.getCorreoUsuario());
+		usuario.setContrasenhaUsuario(dto.getContrasenhaUsuario());
+		usuario.setActivo(0);
+		UsuarioEntity entity = repo.save(usuario);
+		return modelMapper.map(entity, UsuarioDTO.class);	
 	}
 
 	@Override
-	public UsuarioEntity actualizar(Long id, UsuarioDTO dto, RolEntity rol) {
-		UsuarioEntity usuario = obtenerPorId(id);
+	public UsuarioDTO actualizar(Long id, UsuarioDTO dto, RolEntity rol) {
+		UsuarioEntity usuario = repo.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 		
-		if (dto.getNombre_usuario() != null) {
-			usuario.setNombre_usuario(dto.getNombre_usuario());
+		if (dto != null) {
+			if (dto.getNombreUsuario() != null) {
+				usuario.setNombreUsuario(dto.getNombreUsuario());
+			}
+			if (dto.getApellidoUsuario() != null) {
+				usuario.setApellidoUsuario(dto.getApellidoUsuario());
+			}
+			if (dto.getCorreoUsuario() != null) {
+				usuario.setCorreoUsuario(dto.getCorreoUsuario());
+			}
+			if (dto.getContrasenhaUsuario() != null) {
+				usuario.setContrasenhaUsuario(dto.getContrasenhaUsuario());
+			}
 		}
-		
-		if (dto.getApellido_usuario() != null) {
-			usuario.setApellido_usuario(dto.getApellido_usuario());
-		}
-		
-		if (dto.getCorreo_usuario() != null) {
-			usuario.setCorreo_usuario(dto.getCorreo_usuario());
-		}
-		
-		if (dto.getContrasenha_usuario() != null && rol != RolEntity.ADMIN) {
-			usuario.setContrasenha_usuario(dto.getContrasenha_usuario());
-		}
-		
-		return repo.save(usuario);
+		UsuarioEntity entity = repo.save(usuario);
+		return modelMapper.map(entity, UsuarioDTO.class);	
 	}
 
 	@Override
 	public void eliminar(Long id) {
-		UsuarioEntity usuario = obtenerPorId(id);
-		usuario.setActivo(false);
+		UsuarioEntity usuario = repo.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+		usuario.setActivo(1);
 		repo.save(usuario);
 	}
 
