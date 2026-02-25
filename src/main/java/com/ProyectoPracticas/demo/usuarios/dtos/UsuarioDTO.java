@@ -12,63 +12,65 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "UsuarioDTO", description = "Datos para crear o actualizar un usuario")
 public class UsuarioDTO {
 
+	@Schema(description = "Nombre completo del alumno", example = "Inés")
+    @NotNull(message = "Nombre requerido")
+    @NotBlank(message = "Nombre no puede estar vacío")
+    private String nombre_usuario;
+    
+    
+    @Schema(description = "Apellidos completos del alumno", example = "García Chamorro")
+    @NotNull(message = "Apellidos requeridos")
+    @NotBlank(message = "Apellidos no pueden estar vacío")
+    private String apellido_usuario;
+	
+    
     @Schema(description = "Correo electrónico (debe ser gmail.com)", example = "usuario@gmail.com")
     @NotNull(message = "Correo requerido")
     @NotBlank(message = "Correo no vacío")
     @Email(message = "Formato inválido")
     @Pattern(regexp = "^[A-Za-z0-9._%+-]+@gmail\\.com$", message = "Debe ser un correo gmail.com")
-    private String correo;
-
-    @Schema(description = "Nombre completo del alumno", example = "Inés")
-    @NotNull(message = "Nombre requerido")
-    @NotBlank(message = "Nombre no puede estar vacío")
-    private String nombre;
+    private String correo_usuario;
     
     
-    @Schema(description = "Apellidos completo del alumno", example = "García Chamorro")
-    @NotNull(message = "Apellidos requerido")
-    @NotBlank(message = "Apellidos no pueden estar vacío")
-    private String apellido;
+    @Schema(description = "Contraseña del usuario", example = "Password123")
+    @NotNull(message = "Contraseña requerida")
+    @NotBlank(message = "Contraseña no puede estar vacía")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$", message = "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número")
+    private String contrasenha_usuario;
     
-    
-    @Schema(description = "Rol del usuario (ADMIN, PROFESOR, USUARIO)", example = "USUARIO")
-    @NotNull(message = "El rol es obligatorio")
-    private RolEntity rol;
+    public UsuarioDTO() {}
 
 
-    public UsuarioDTO() {
-}
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getNombre_usuario() { 
+    	return nombre_usuario; 
     }
     
-    public String getApellido() {
-        return apellido;
+    public void setNombre_usuario(String nombre_usuario) { 
+    	this.nombre_usuario = nombre_usuario; 
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public String getApellido_usuario() { 
+    	return apellido_usuario; 
     }
     
-    
-    public RolEntity getRol() {
-		return rol;
-	}
-    
-    public void setRol(RolEntity rol) {
-    	this.rol = rol;
+    public void setApellido_usuario(String apellido_usuario) { 
+    	this.apellido_usuario = apellido_usuario; 
     }
+
+    public String getCorreo_usuario() { 
+    	return correo_usuario;
+    }
+    
+    public void setCorreo_usuario(String correo_usuario) { 
+    	this.correo_usuario = correo_usuario; 
+    }
+
+    public String getContrasenha_usuario() { 
+    	return contrasenha_usuario; 
+    }
+    
+    public void setContrasenha_usuario(String contrasenha_usuario) { 
+    	this.contrasenha_usuario = contrasenha_usuario; 
+    }
+
 }

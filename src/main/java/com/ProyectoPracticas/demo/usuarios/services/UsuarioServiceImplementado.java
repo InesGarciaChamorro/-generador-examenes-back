@@ -18,7 +18,7 @@ public class UsuarioServiceImplementado implements UsuarioService {
 	
 	@Override
 	public List<UsuarioEntity> listar() {
-		return repo.findAll().stream().filter(UsuarioEntity::isActivo).toList();
+		return repo.findAll().stream().filter(UsuarioEntity::getActivo).toList();
 	}
 
 	@Override
@@ -29,10 +29,10 @@ public class UsuarioServiceImplementado implements UsuarioService {
 	@Override
 	public UsuarioEntity crear(UsuarioDTO dto) {
 		UsuarioEntity usuario = new UsuarioEntity();
-		usuario.setNombre(dto.getNombre());
-		usuario.setApellido(dto.getApellido());	
-		usuario.setCorreo(dto.getCorreo());
-		usuario.setRol(dto.getRol());	
+		usuario.setNombre_usuario(dto.getNombre_usuario());
+		usuario.setApellido_usuario(dto.getApellido_usuario());	
+		usuario.setCorreo_usuario(dto.getCorreo_usuario());
+		usuario.setContrasenha_usuario(dto.getContrasenha_usuario());
 		usuario.setActivo(true);
 		return repo.save(usuario);	
 	}
@@ -41,15 +41,23 @@ public class UsuarioServiceImplementado implements UsuarioService {
 	public UsuarioEntity actualizar(Long id, UsuarioDTO dto, RolEntity rol) {
 		UsuarioEntity usuario = obtenerPorId(id);
 		
-		// Solo actualizamos el rol si el rol del usuario no es ADMIN
-		if (!rol.equals(RolEntity.ADMIN)) {
-			dto.setRol(usuario.getRol());
+		if (dto.getNombre_usuario() != null) {
+			usuario.setNombre_usuario(dto.getNombre_usuario());
 		}
-		usuario.setNombre(dto.getNombre());
-		usuario.setApellido(dto.getApellido());
-		usuario.setCorreo(dto.getCorreo());
-		usuario.setRol(dto.getRol());
-		return repo.save(usuario);	
+		
+		if (dto.getApellido_usuario() != null) {
+			usuario.setApellido_usuario(dto.getApellido_usuario());
+		}
+		
+		if (dto.getCorreo_usuario() != null) {
+			usuario.setCorreo_usuario(dto.getCorreo_usuario());
+		}
+		
+		if (dto.getContrasenha_usuario() != null && rol != RolEntity.ADMIN) {
+			usuario.setContrasenha_usuario(dto.getContrasenha_usuario());
+		}
+		
+		return repo.save(usuario);
 	}
 
 	@Override
