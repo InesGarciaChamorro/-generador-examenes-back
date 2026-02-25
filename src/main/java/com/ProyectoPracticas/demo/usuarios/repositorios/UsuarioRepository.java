@@ -9,5 +9,5 @@ import com.ProyectoPracticas.demo.usuarios.entidades.UsuarioEntity;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {	
-	List<UsuarioEntity> findByActivoTrue();
+	List<UsuarioEntity> findByActivo(int activo);
 }

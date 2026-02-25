@@ -2,14 +2,15 @@ package com.ProyectoPracticas.demo.usuarios.services;
 
 import java.util.List;
 
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioDTO;
+import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioCreateDTO;
+import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioResponseDTO;
+import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioUpdateDTO;
 import com.ProyectoPracticas.demo.usuarios.entidades.RolEntity;
 
 public interface UsuarioService {
-	List<UsuarioDTO> listar();
-	UsuarioDTO obtenerPorId(Long id);
-	UsuarioDTO crear(UsuarioDTO dto);
-	UsuarioDTO actualizar(Long id, UsuarioDTO dto, RolEntity rol);
+	List<UsuarioResponseDTO> listar();
+	UsuarioResponseDTO obtenerPorId(Long id);
+	UsuarioResponseDTO crear(UsuarioCreateDTO dto);
+	UsuarioResponseDTO actualizar(Long id, UsuarioUpdateDTO dto, String rol);
 	void eliminar(Long id);
-
 }

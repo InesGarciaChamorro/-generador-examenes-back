@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioDTO;
+import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioCreateDTO;
+import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioResponseDTO;
+import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioUpdateDTO;
 import com.ProyectoPracticas.demo.usuarios.entidades.RolEntity;
 import com.ProyectoPracticas.demo.usuarios.entidades.UsuarioEntity;
 import com.ProyectoPracticas.demo.usuarios.services.UsuarioService;
@@ -44,21 +46,16 @@ public class UsuarioController {
 	@Operation(summary = "Listar usuarios", description = "Devuelve la lista completa de usuarios registrados en el sistema")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Lista de usuarios obtenida exitosamente", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = UsuarioEntity.class)))) })
-	public List<UsuarioDTO> listar() {
+	public List<UsuarioResponseDTO> listar() {
 		return service.listar();
 	}
 
 	// Devuelve usuario por id
 	@GetMapping("/{id}")
 	@Operation(summary = "Obtener usuario por ID")
-	public ResponseEntity<UsuarioEntity> obtenerPorId(
+	public ResponseEntity<UsuarioResponseDTO> obtenerPorId(
 			@Parameter(description = "ID del usuario a obtener", example = "1", required = true) @PathVariable Long id) {
-		try {
-			UsuarioEntity usuario = service.obtenerPorId(id);
-			return ResponseEntity.ok(usuario);
-		} catch (RuntimeException e) {
-			return ResponseEntity.notFound().build();
-		}
+		return ResponseEntity.ok(service.obtenerPorId(id));
 	}
 
 
@@ -66,17 +63,18 @@ public class UsuarioController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	@Operation(summary = "Crear usuario")
-	public UsuarioDTO crear(@Valid @RequestBody UsuarioDTO dto) {
+	public UsuarioResponseDTO crear(@Valid @RequestBody UsuarioCreateDTO dto) {
 		return service.crear(dto);
 	}
 
 	// Actualiza usuario
 	@PatchMapping("/{id}")
 	@Operation(summary = "Actualizar usuario", description = "Solo el admin puede actualizar el rol de un usuario. El resto de campos pueden ser actualizados por cualquier rol.")
-	public ResponseEntity<UsuarioEntity> actualizar(@PathVariable Long id,
-			@RequestBody(required = false) UsuarioDTO dto,
+	public ResponseEntity<UsuarioResponseDTO> actualizar(
+			@PathVariable Long id,
+			@RequestBody(required = false) UsuarioUpdateDTO dto,
 			@RequestHeader(name = "Rol", required = false, defaultValue = "USUARIO") String rol) {
-		UsuarioDTO actualizado = service.actualizar(id, dto, rol.toUpperCase());
+		UsuarioResponseDTO actualizado = service.actualizar(id, dto, rol.toUpperCase());
 		return ResponseEntity.ok(actualizado);
 	}
 
