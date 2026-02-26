@@ -24,21 +24,31 @@ public class UsuarioServiceImplementado implements UsuarioService {
 	
 	/* * Repositorio para acceder a los datos de los usuarios en la base de datos.
 	 */
-	@Autowired
 	private UsuarioRepository repo;
 	
 	/* * Repositorio para acceder a los datos de los roles en la base de datos.
 	 */
-	@Autowired
 	private RolRepository rolRepo;
 	
 	/* * Mapper para convertir entre entidades y DTOs.
 	 */
-	@Autowired
 	private ModelMapper modelMapper;
 	
-	/* * Lista todos los usuarios activos en la base de datos y los convierte a DTOs para su presentación.
-	 * @return Lista de UsuarioListDTO con la información de los usuarios activos.
+	
+	/* * Constructor para inyectar las dependencias necesarias.
+	 * @param repo Repositorio de usuarios.
+	 * @param rolRepo Repositorio de roles.
+	 * @param modelMapper Mapper para conversiones entre entidades y DTOs.
+	 */
+	public UsuarioServiceImplementado(UsuarioRepository repo, RolRepository rolRepo, ModelMapper modelMapper) {
+		this.repo = repo;
+		this.rolRepo = rolRepo;
+		this.modelMapper = modelMapper;
+	}
+	
+	
+	/* * Lista todos los usuarios registrados en la base de datos, convirtiendo cada entidad a un DTO de lista para su presentación.
+	 * @return Lista de UsuarioListDTO con la información básica de cada usuario.
 	 */
 	@Override
 	public List<UsuarioListDTO> listar() {
@@ -86,9 +96,6 @@ public class UsuarioServiceImplementado implements UsuarioService {
 		UsuarioEntity usuario = repo.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado por actualizar"));
 		
 		boolean esAdmin = "ADMIN".equalsIgnoreCase(rol);
-		boolean esUsuario = "USUARIO".equalsIgnoreCase(rol);
-		boolean esProfesor = "PROFESOR".equalsIgnoreCase(rol);
-		
 		
 		
 		// ADMIN no puede cambiar contraseña 
