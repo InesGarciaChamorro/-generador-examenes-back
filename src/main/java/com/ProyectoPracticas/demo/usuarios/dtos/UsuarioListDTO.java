@@ -3,10 +3,16 @@ package com.ProyectoPracticas.demo.usuarios.dtos;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-/* * DTO para la creación de un nuevo usuario.
+/* * DTO para listar los usuarios existentes.
  */
 
-public class UsuarioCreateDTO {
+public class UsuarioListDTO {
+	
+	/* * Id único del usuario.
+	 * Debe ser un valor no nulo y no vacío.
+	 */
+	@NotBlank(message = "El id de usuario es obligatorio")
+	private String idUsuario;
 	
 	/* * Nombre del usuario.
 	 * Debe ser un valor no nulo y no vacío.
@@ -20,7 +26,6 @@ public class UsuarioCreateDTO {
 	@NotBlank(message = "Los apellidos son obligatorios")
 	private String apellidoUsuario;
 	
-	
 	/* * Correo electrónico del usuario.
 	 * Debe ser un valor no nulo, no vacío y con formato de correo electrónico válido.
 	 */
@@ -29,14 +34,19 @@ public class UsuarioCreateDTO {
 	private String correoUsuario;
 	
 	
-	/* * Contraseña del usuario.
-	 * Debe ser un valor no nulo y no vacío.
-	 */
-	@NotBlank(message = "La contraseña es obligatoria")
-	private String contrasenhaUsuario;
-	
 	/* * Getters y setters para los campos del DTO.
- */
+	 */
+	/* * Método para obtener el id del usuario.
+	 */
+	public String getIdUsuario() {
+		return idUsuario;
+	}
+	
+	/* * Método para establecer el id del usuario.
+	 */
+	public void setIdUsuario(String idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 	
 	/* * Método para obtener el nombre del usuario.
 	 */
@@ -73,18 +83,4 @@ public class UsuarioCreateDTO {
 	public void setCorreoUsuario(String correoUsuario) {
 		this.correoUsuario = correoUsuario;
 	}
-	
-	/* * Método para obtener la contraseña del usuario.
-	 */
-	public String getContrasenhaUsuario() {
-		return contrasenhaUsuario;
-	}
-	
-	/* * Método para establecer la contraseña del usuario.
-	 */
-	public void setContrasenhaUsuario(String contrasenhaUsuario) {
-		this.contrasenhaUsuario = contrasenhaUsuario;
-	}
-	
-	
 }
