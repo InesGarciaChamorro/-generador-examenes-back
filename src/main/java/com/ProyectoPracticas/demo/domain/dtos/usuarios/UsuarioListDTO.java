@@ -1,17 +1,18 @@
-package com.ProyectoPracticas.demo.usuarios.dtos;
+package com.ProyectoPracticas.demo.domain.dtos.usuarios;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-
-/* * DTO para la eliminación de un usuario existente.
+/* * DTO para listar los usuarios existentes.
  */
-public class UsuarioDeleteDTO {
+
+public class UsuarioListDTO {
 	
-	/* *Id del usuario.
-	 * Debe ser valor nulo y no vacío
+	/* * Id único del usuario.
+	 * Debe ser un valor no nulo y no vacío.
 	 */
 	@NotBlank(message = "El id de usuario es obligatorio")
-	private Long idUsuario;
+	private String idUsuario;
 	
 	/* * Nombre del usuario.
 	 * Debe ser un valor no nulo y no vacío.
@@ -25,18 +26,25 @@ public class UsuarioDeleteDTO {
 	@NotBlank(message = "Los apellidos son obligatorios")
 	private String apellidoUsuario;
 	
+	/* * Correo electrónico del usuario.
+	 * Debe ser un valor no nulo, no vacío y con formato de correo electrónico válido.
+	 */
+	@Email(message = "El correo electrónico no es válido")
+	@NotBlank(message = "El correo electrónico es obligatorio")
+	private String correoUsuario;
+	
 	
 	/* * Getters y setters para los campos del DTO.
 	 */
 	/* * Método para obtener el id del usuario.
 	 */
-	public Long getIdUsuario() {
+	public String getIdUsuario() {
 		return idUsuario;
 	}
 	
 	/* * Método para establecer el id del usuario.
 	 */
-	public void setIdUsuario(Long idUsuario) {
+	public void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 	
@@ -62,5 +70,17 @@ public class UsuarioDeleteDTO {
 	 */
 	public void setApellidoUsuario(String apellidoUsuario) {
 		this.apellidoUsuario = apellidoUsuario;
+	}
+	
+	/* * Método para obtener el correo electrónico del usuario.
+	 */
+	public String getCorreoUsuario() {
+		return correoUsuario;
+	}
+	
+	/* * Método para establecer el correo electrónico del usuario.
+	 */
+	public void setCorreoUsuario(String correoUsuario) {
+		this.correoUsuario = correoUsuario;
 	}
 }

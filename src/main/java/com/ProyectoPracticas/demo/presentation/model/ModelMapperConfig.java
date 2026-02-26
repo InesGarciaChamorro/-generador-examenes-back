@@ -1,4 +1,4 @@
-package com.ProyectoPracticas.demo.usuarios.model;
+package com.ProyectoPracticas.demo.presentation.model;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

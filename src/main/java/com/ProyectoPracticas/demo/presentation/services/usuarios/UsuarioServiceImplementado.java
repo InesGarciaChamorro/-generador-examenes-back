@@ -1,4 +1,4 @@
-package com.ProyectoPracticas.demo.usuarios.services;
+package com.ProyectoPracticas.demo.presentation.services.usuarios;
 
 import java.util.List;
 
@@ -6,15 +6,15 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioCreateDTO;
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioDeleteDTO;
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioDetailDTO;
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioListDTO;
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioUpdateDTO;
-import com.ProyectoPracticas.demo.usuarios.entidades.RolEntity;
-import com.ProyectoPracticas.demo.usuarios.entidades.UsuarioEntity;
-import com.ProyectoPracticas.demo.usuarios.repositorios.RolRepository;
-import com.ProyectoPracticas.demo.usuarios.repositorios.UsuarioRepository;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioCreateDTO;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioDeleteDTO;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioDetailDTO;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioListDTO;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioUpdateDTO;
+import com.ProyectoPracticas.demo.domain.entities.roles.RolEntity;
+import com.ProyectoPracticas.demo.domain.entities.usuarios.UsuarioEntity;
+import com.ProyectoPracticas.demo.domain.repositories.roles.RolRepository;
+import com.ProyectoPracticas.demo.domain.repositories.usuarios.UsuarioRepository;
 
 /* * Implementación de la interfaz UsuarioService.
  * Proporciona la lógica de negocio para la gestión de usuarios, incluyendo operaciones para listar, obtener por ID, crear, actualizar y eliminar usuarios.

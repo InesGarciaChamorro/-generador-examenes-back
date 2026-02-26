@@ -14,16 +14,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioCreateDTO;
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioDeleteDTO;
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioDetailDTO;
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioListDTO;
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioUpdateDTO;
-import com.ProyectoPracticas.demo.usuarios.entidades.RolEntity;
-import com.ProyectoPracticas.demo.usuarios.entidades.UsuarioEntity;
-import com.ProyectoPracticas.demo.usuarios.repositorios.RolRepository;
-import com.ProyectoPracticas.demo.usuarios.repositorios.UsuarioRepository;
-import com.ProyectoPracticas.demo.usuarios.services.UsuarioServiceImplementado;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioCreateDTO;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioDeleteDTO;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioDetailDTO;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioListDTO;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioUpdateDTO;
+import com.ProyectoPracticas.demo.domain.entities.roles.RolEntity;
+import com.ProyectoPracticas.demo.domain.entities.usuarios.UsuarioEntity;
+import com.ProyectoPracticas.demo.domain.repositories.roles.RolRepository;
+import com.ProyectoPracticas.demo.domain.repositories.usuarios.UsuarioRepository;
+import com.ProyectoPracticas.demo.presentation.services.usuarios.UsuarioServiceImplementado;
 
 /**
  * Pruebas unitarias para UsuarioServiceImplementado.

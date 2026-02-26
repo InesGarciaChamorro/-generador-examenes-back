@@ -1,11 +1,11 @@
-package com.ProyectoPracticas.demo.usuarios.repositorios;
+package com.ProyectoPracticas.demo.domain.repositories.usuarios;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ProyectoPracticas.demo.usuarios.entidades.UsuarioEntity;
+import com.ProyectoPracticas.demo.domain.entities.usuarios.UsuarioEntity;
 
 /**
  * Repositorio para la entidad UsuarioEntity.

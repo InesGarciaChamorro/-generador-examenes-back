@@ -1,4 +1,4 @@
-package com.ProyectoPracticas.demo.usuarios.controladores;
+package com.ProyectoPracticas.demo.presentation.controllers.usuarios;
 
 import java.util.List;
 
@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioCreateDTO;
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioDeleteDTO;
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioDetailDTO;
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioListDTO;
-import com.ProyectoPracticas.demo.usuarios.dtos.UsuarioUpdateDTO;
-import com.ProyectoPracticas.demo.usuarios.entidades.RolEntity;
-import com.ProyectoPracticas.demo.usuarios.entidades.UsuarioEntity;
-import com.ProyectoPracticas.demo.usuarios.services.UsuarioService;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioCreateDTO;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioDeleteDTO;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioDetailDTO;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioListDTO;
+import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioUpdateDTO;
+import com.ProyectoPracticas.demo.domain.entities.roles.RolEntity;
+import com.ProyectoPracticas.demo.domain.entities.usuarios.UsuarioEntity;
+import com.ProyectoPracticas.demo.presentation.services.usuarios.UsuarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -146,7 +146,7 @@ public class UsuarioController {
 	
 	
 	/* * Endpoint para eliminar un usuario del sistema (borrado lógico).*/
-	// Elimina usuario
+	// Elimina usuario (borrado lógico)
 	@DeleteMapping("/{id}")
 	@Operation(summary = "Eliminar usuario", description = "Elimina un usuario (Borrado lógico)")
 	@ApiResponses(value = {

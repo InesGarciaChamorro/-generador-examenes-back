@@ -1,6 +1,9 @@
-package com.ProyectoPracticas.demo.usuarios.entidades;
+package com.ProyectoPracticas.demo.domain.entities.roles;
 
 import java.util.*;
+
+import com.ProyectoPracticas.demo.domain.entities.usuarios.UsuarioEntity;
+
 import jakarta.persistence.*;
 
 /**

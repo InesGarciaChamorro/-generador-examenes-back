@@ -1,8 +1,9 @@
-package com.ProyectoPracticas.demo.usuarios.repositorios;
+package com.ProyectoPracticas.demo.domain.repositories.roles;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.ProyectoPracticas.demo.usuarios.entidades.RolEntity;
+
+import com.ProyectoPracticas.demo.domain.entities.roles.RolEntity;
 
 /**
  * Repositorio para la entidad RolEntity.

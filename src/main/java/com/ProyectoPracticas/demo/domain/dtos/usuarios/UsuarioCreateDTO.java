@@ -1,4 +1,4 @@
-package com.ProyectoPracticas.demo.usuarios.dtos;
+package com.ProyectoPracticas.demo.domain.dtos.usuarios;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

@@ -1,9 +1,11 @@
-package com.ProyectoPracticas.demo.usuarios.entidades;
+package com.ProyectoPracticas.demo.domain.entities.usuarios;
 
 
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
+import com.ProyectoPracticas.demo.domain.entities.roles.RolEntity;
 
 /**
  * Entidad que representa a un usuario en la base de datos.
