@@ -1,6 +1,6 @@
 package com.ProyectoPracticas.demo.domain.dtos.usuariosRoles;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /* * DTO para la creación de una relación entre un usuario y un rol.
  * Este DTO se utiliza para recibir los datos necesarios para asignar un rol a un usuario específico.
@@ -11,7 +11,7 @@ public class UsuarioRolCreateDTO {
 	/* * El ID del usuario al que se le asignará el rol.
 	 * Este campo es obligatorio y no puede estar vacío.
 	 */
-	@NotBlank(message = "El ID del usuario no puede estar vacío")
+	@NotNull(message = "El ID del usuario no puede estar vacío")
 	private Long idRol;
 	
 	/* * Los setters y getters para el campo idRol.

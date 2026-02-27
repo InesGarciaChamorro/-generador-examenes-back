@@ -1,6 +1,7 @@
 package com.ProyectoPracticas.demo.domain.dtos.roles;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /* * DTO para listar los roles existentes.
  */
@@ -9,8 +10,8 @@ public class RolListDTO {
 	/* * Id único del rol.
 	 * Debe ser un valor no nulo y no vacío.
 	 */
-	@NotBlank(message = "El id del rol es obligatorio")
-	private String idRol;
+	@NotNull(message = "El id del rol no puede ser nulo")
+	private Long idRol;
 	
 	/* * Nombre del rol.
 	 * Debe ser un valor no nulo y no vacío.
@@ -21,7 +22,7 @@ public class RolListDTO {
 	/* * Campo para indicar si el rol está activo o no.
 	 * Debe ser un valor entero (0 o 1).
 	 */
-	@NotBlank(message = "El estado del rol es obligatorio")
+	@NotNull(message = "El estado del rol no puede ser nulo")
 	private int activo;
 	
 	
@@ -29,13 +30,13 @@ public class RolListDTO {
 	 */
 	/* * Método para obtener el id del rol.
 	 */
-	public String getIdRol() {
+	public Long getIdRol() {
 		return idRol;
 	}
 	
 	/* * Método para establecer el id del rol.
 	 */
-	public void setIdRol(String idRol) {
+	public void setIdRol(Long idRol) {
 		this.idRol = idRol;
 	}
 	

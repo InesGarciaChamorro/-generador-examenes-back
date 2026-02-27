@@ -1,17 +1,18 @@
 package com.ProyectoPracticas.demo.domain.dtos.usuariosRoles;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * DTO para listar las relaciones entre usuarios y roles.
  */
 public class UsuarioRolListDTO {
 	/** El id del usuario al que se le asignó el rol. */
-	@NotBlank(message = "El id del usuario no puede estar vacío")
+	@NotNull(message = "El id del usuario no puede ser nulo")
 	private Long idUsuario;
 	
 	/** El id del rol que se asignó al usuario. */
-	@NotBlank(message = "El id del rol no puede estar vacío")
+	@NotNull(message = "El id del rol no puede ser nulo")
 	private Long idRol;
 	
 	

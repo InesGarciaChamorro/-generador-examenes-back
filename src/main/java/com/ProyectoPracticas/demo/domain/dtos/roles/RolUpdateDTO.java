@@ -1,6 +1,7 @@
 package com.ProyectoPracticas.demo.domain.dtos.roles;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /* * DTO para la actualización de un rol existente.
  */
@@ -14,7 +15,7 @@ public class RolUpdateDTO {
 	/* * El estado activo del rol.
 	 * Debe ser un valor no nulo y no vacío.
 	 */
-	@NotBlank(message = "El estado activo es obligatorio")
+	@NotNull(message = "El estado activo no puede ser nulo")
 	private Integer activo;
 	
 	

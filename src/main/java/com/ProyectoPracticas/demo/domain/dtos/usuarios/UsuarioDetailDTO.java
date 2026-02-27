@@ -2,6 +2,7 @@ package com.ProyectoPracticas.demo.domain.dtos.usuarios;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /* * DTO para la representación detallada de un usuario.
  */
@@ -11,8 +12,8 @@ public class UsuarioDetailDTO {
 	/* * Id único del usuario.
 	 * Debe ser un valor no nulo y no vacío.
 	 */
-	@NotBlank(message = "El id de usuario es obligatorio")
-	private String idUsuario;
+	@NotNull(message = "El id de usuario no puede ser nulo")
+	private Long idUsuario;
 	
 	/* * Nombre del usuario.
 	 * Debe ser un valor no nulo y no vacío.
@@ -36,7 +37,7 @@ public class UsuarioDetailDTO {
 	/* * Estado activo del usuario.
 	 * Debe ser un valor no nulo y no vacío.
 	 */
-	@NotBlank(message = "El estado activo es obligatorio")
+	@NotNull(message = "El estado activo no puede ser nulo")
 	private Integer activo;
 	
 	
@@ -44,13 +45,13 @@ public class UsuarioDetailDTO {
 	 */
 	/* * Método para obtener el id del usuario.
 	 */
-	public String getIdUsuario() {
+	public Long getIdUsuario() {
 		return idUsuario;
 	}
 	
 	/* * Método para establecer el id del usuario.
 	 */
-	public void setIdUsuario(String idUsuario) {
+	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 	

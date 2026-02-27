@@ -1,6 +1,7 @@
 package com.ProyectoPracticas.demo.domain.dtos.usuarios;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 
 /* * DTO para la eliminación de un usuario existente.
@@ -10,7 +11,7 @@ public class UsuarioDeleteDTO {
 	/* *Id del usuario.
 	 * Debe ser valor nulo y no vacío
 	 */
-	@NotBlank(message = "El id de usuario es obligatorio")
+	@NotNull(message = "El id de usuario no puede ser nulo")
 	private Long idUsuario;
 	
 	/* * Nombre del usuario.

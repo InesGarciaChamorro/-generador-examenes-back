@@ -100,7 +100,7 @@ public class UsuarioRolServiceImplementado implements UsuarioRolService{
         List<RolListDTO> lista = new ArrayList<>();
         for (RolEntity r : usuario.getConjuntoRoles()) {
             RolListDTO dto = new RolListDTO();
-            dto.setIdRol(String.valueOf(r.getIdRol()));
+            dto.setIdRol(r.getIdRol());
             dto.setNombreRol(r.getNombreRol());
             dto.setActivo(r.getActivo());
             lista.add(dto);

@@ -3,13 +3,14 @@ package com.ProyectoPracticas.demo.domain.dtos.usuarios;
  */
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class UsuarioCreateResponseDTO {
 	
 	/* * ID del usuario creado.
 	 * Debe ser un valor no nulo y no vacío.
 	 */
-	@NotBlank(message = "El ID del usuario es obligatorio")
+	@NotNull(message = "El ID del usuario no puede ser nulo")
 	private Long idUsuario;
 	
 	/* * Nombre del usuario creado.

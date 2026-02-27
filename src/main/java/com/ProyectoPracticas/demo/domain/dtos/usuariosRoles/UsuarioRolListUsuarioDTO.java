@@ -1,6 +1,7 @@
 package com.ProyectoPracticas.demo.domain.dtos.usuariosRoles;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /*
  * DTO para mostrar el nombre de usuario y su estado activo en la lista de usuarios con roles.
@@ -17,7 +18,7 @@ public class UsuarioRolListUsuarioDTO {
 	/**
 	 * El estado activo del usuario.
 	 */
-	@NotBlank(message = "El estado activo no puede estar vacío")
+	@NotNull(message = "El estado activo no puede ser nulo")
 	private int activo;
 	
 	

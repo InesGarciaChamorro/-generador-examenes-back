@@ -1,6 +1,7 @@
 package com.ProyectoPracticas.demo.domain.dtos.roles;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /* * DTO para la respuesta de la creación de un nuevo rol.
  * Actualmente no contiene campos, pero se puede ampliar en el futuro
@@ -11,7 +12,7 @@ public class RolCreateResponseDTO {
 	/* * ID del rol creado.
 	 * Debe ser un valor no nulo y no vacío.
 	 */
-	@NotBlank(message = "El ID del rol es obligatorio")
+	@NotNull(message = "El ID del rol no puede ser nulo")
 	private Long idRol;
 	
 	

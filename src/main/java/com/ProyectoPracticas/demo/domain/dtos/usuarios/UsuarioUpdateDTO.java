@@ -2,6 +2,7 @@ package com.ProyectoPracticas.demo.domain.dtos.usuarios;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /* * DTO para la actualización de un usuario existente.
  */
@@ -35,14 +36,12 @@ public class UsuarioUpdateDTO {
 	/* * Estado activo del usuario.
 	 * Debe ser un valor no nulo y no vacío.
 	 */
-	@NotBlank(message = "El estado activo es obligatorio")
+	@NotNull(message = "El estado activo no puede ser nulo")
 	private Integer activo;
 	
 	/* * Nombre del rol del usuario.
 	 * Solo lo puede usar un admin.
-	 * Debe ser un valor no nulo y no vacío si el usuario es admin.
 	 */
-	@NotBlank(message = "El nombre del rol es obligatorio (si eres admin)")
 	private String nombreRol; // Solo lo puede usar un admin
 	
 	/* * Getters y setters para los campos del DTO.
