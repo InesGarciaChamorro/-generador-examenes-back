@@ -136,9 +136,6 @@ public class UsuarioController {
 			@PathVariable Long id,
 			@RequestBody(required = false) UsuarioUpdateDTO dto,
 			@RequestHeader(name = "Rol", required = false, defaultValue = "USUARIO") String rol) {
-				if (dto.getIdUsuario() != null && !dto.getIdUsuario().equals(id)) {
-					return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-				}
 				UsuarioDetailDTO actualizado = service.actualizar(id, dto, rol.toUpperCase());
 				return ResponseEntity.ok(actualizado);
 			}

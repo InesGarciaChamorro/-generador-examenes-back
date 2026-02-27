@@ -7,12 +7,6 @@ import jakarta.validation.constraints.NotBlank;
  */
 public class UsuarioUpdateDTO {
 	
-	/* * ID del usuario a actualizar.
-	 * Debe ser un valor no nulo y no vacío.
-	 */
-	@NotBlank(message = "El id de usuario es obligatorio")
-	private String idUsuario;
-	
 	/* * Nombre del usuario.
 	 * Debe ser un valor no nulo y no vacío.
 	 */
@@ -53,17 +47,7 @@ public class UsuarioUpdateDTO {
 	
 	/* * Getters y setters para los campos del DTO.
 	 */
-	/* * Método para obtener el ID del usuario.
-	 */
-	public String getIdUsuario() {
-		return idUsuario;
-	}
 	
-	/* * Método para establecer el ID del usuario.
-	 */
-	public void setIdUsuario(String idUsuario) {
-		this.idUsuario = idUsuario;
-	}
 	
 	/* * Método para obtener el nombre del usuario.
 	 */

@@ -104,7 +104,7 @@ public class RolServiceImplementado implements RolService {
 		
 		RolDeleteDTO dto = new RolDeleteDTO();
 		dto.setIdRol(rol.getIdRol());
-		//dto.setNombreRol(rol.getNombreRol());		ARREGLAR ESTO
+		dto.setNombreRol(rol.getNombreRol());		
 		
 		return dto;
 	}

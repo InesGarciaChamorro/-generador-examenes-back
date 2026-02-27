@@ -2,17 +2,20 @@ package com.ProyectoPracticas.demo.domain.dtos.roles;
 
 import jakarta.validation.constraints.NotBlank;
 
-/* * DTO para la eliminación de un rol existente.
+/* * DTO para la respuesta de la creación de un nuevo rol.
+ * Actualmente no contiene campos, pero se puede ampliar en el futuro
+ * para incluir información relevante sobre el rol creado.
  */
-public class RolDeleteDTO {
+public class RolCreateResponseDTO {
 	
-	/* * Id del rol.
+	/* * ID del rol creado.
 	 * Debe ser un valor no nulo y no vacío.
 	 */
-	@NotBlank(message = "El id del rol es obligatorio")
+	@NotBlank(message = "El ID del rol es obligatorio")
 	private Long idRol;
 	
-	/* * Nombre del rol.
+	
+	/* * Nombre del rol creado.
 	 * Debe ser un valor no nulo y no vacío.
 	 */
 	@NotBlank(message = "El nombre del rol es obligatorio")
@@ -21,26 +24,25 @@ public class RolDeleteDTO {
 	
 	/* * Getters y setters para los campos del DTO.
 	 */
-	
-	/* * Método para obtener el id del rol.
+	/* * Método para obtener el ID del rol creado.
 	 */
 	public Long getIdRol() {
 		return idRol;
 	}
 	
-	/* * Método para establecer el id del rol.
+	/* * Método para establecer el ID del rol creado.
 	 */
 	public void setIdRol(Long idRol) {
 		this.idRol = idRol;
 	}
 	
-	/* * Método para obtener el nombre del rol.
+	/* * Método para obtener el nombre del rol creado.
 	 */
 	public String getNombreRol() {
 		return nombreRol;
 	}
 	
-	/* * Método para establecer el nombre del rol.
+	/* * Método para establecer el nombre del rol creado.
 	 */
 	public void setNombreRol(String nombreRol) {
 		this.nombreRol = nombreRol;
