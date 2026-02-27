@@ -9,6 +9,7 @@ import com.ProyectoPracticas.demo.domain.dtos.roles.RolDeleteDTO;
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolDetailDTO;
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolListDTO;
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolUpdateDTO;
+import com.ProyectoPracticas.demo.domain.dtos.roles.RolCreateResponseDTO;
 import com.ProyectoPracticas.demo.domain.entities.roles.RolEntity;
 import com.ProyectoPracticas.demo.domain.repositories.roles.RolRepository;
 
@@ -62,12 +63,16 @@ public class RolServiceImplementado implements RolService {
 	 * @return RolDetailDTO con la información detallada del rol creado.
 	 */
 	@Override
-	public RolDetailDTO crear(RolCreateDTO dto) {
+	public RolCreateResponseDTO crear(RolCreateDTO dto) {
 		RolEntity rol = new RolEntity();
         rol.setNombreRol(dto.getNombreRol());
         rol.setActivo(1);
 
-        return modelMapper.map(repo.save(rol), RolDetailDTO.class);
+        RolEntity saved = repo.save(rol);
+        RolCreateResponseDTO response = new RolCreateResponseDTO();
+        response.setIdRol(saved.getIdRol());
+        response.setNombreRol(saved.getNombreRol());
+        return response;
 	}
 	
 	

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolCreateDTO;
+import com.ProyectoPracticas.demo.domain.dtos.roles.RolCreateResponseDTO;
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolDetailDTO;
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolDeleteDTO;
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolListDTO;
@@ -75,21 +76,20 @@ public class RolController {
         return ResponseEntity.ok(service.obtenerPorId(id));
     }
 
-    
     /* * Endpoint para crear un nuevo rol en el sistema.
 	 * Recibe un objeto RolCreateDTO en el cuerpo de la solicitud con la información necesaria para crear el rol.
 	 * Devuelve un objeto RolDetailDTO con la información del rol creado.
 	 */
-    // Crear nuevo rol
+    // Crear nuevo rol: ahora devuelve solo id y nombre (RolCreateResponseDTO)
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Crear rol")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Rol creado",
-            content = @Content(schema = @Schema(implementation = RolDetailDTO.class))),
+            content = @Content(schema = @Schema(implementation = RolCreateResponseDTO.class))),
         @ApiResponse(responseCode = "400", description = "Solicitud inválida")
     })
-    public RolDetailDTO crear(@RequestBody RolCreateDTO dto) {
+    public RolCreateResponseDTO crear(@RequestBody RolCreateDTO dto) {
         return service.crear(dto);
     }
 

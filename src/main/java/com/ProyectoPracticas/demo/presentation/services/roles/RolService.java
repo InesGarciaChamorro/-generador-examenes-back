@@ -6,6 +6,7 @@ import com.ProyectoPracticas.demo.domain.dtos.roles.RolDeleteDTO;
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolDetailDTO;
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolUpdateDTO;
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolListDTO;
+import com.ProyectoPracticas.demo.domain.dtos.roles.RolCreateResponseDTO;
 
 /* * Interfaz que define los métodos para la gestión de roles.
  * Proporciona operaciones para listar, obtener por ID, crear, actualizar y eliminar roles.
@@ -13,7 +14,7 @@ import com.ProyectoPracticas.demo.domain.dtos.roles.RolListDTO;
 public interface RolService {
 	List<RolListDTO> listar();
 	RolDetailDTO obtenerPorId(Long id);
-	RolDetailDTO crear(RolCreateDTO dto);
+	RolCreateResponseDTO crear(RolCreateDTO dto);
 	RolDetailDTO actualizar(Long id, RolUpdateDTO dto);
 	RolDeleteDTO eliminar(Long id);
 }
