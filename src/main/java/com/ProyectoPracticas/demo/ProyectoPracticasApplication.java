@@ -4,8 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @SpringBootApplication
 public class ProyectoPracticasApplication {
@@ -35,22 +33,3 @@ public class ProyectoPracticasApplication {
 	}
 	
 }
-
-
-
-/* En caso de que pidan con SpringBoot, usamos un controller:
-package com.ProyectoPracticas.demo.controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-public class ApiController {
-	
-	@RequestMapping("/api")
-	@GetMapping("/")
-	public String holaMundo(){
-		return "Hola Mundo";
-	}
-}
-*/

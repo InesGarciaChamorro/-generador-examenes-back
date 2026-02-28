@@ -3,8 +3,8 @@ package com.ProyectoPracticas.demo.presentation.services.usuarios;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ProyectoPracticas.demo.presentation.exceptions.NotFoundException;
 
 import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioCreateDTO;
 import com.ProyectoPracticas.demo.domain.dtos.usuarios.UsuarioDeleteDTO;
@@ -64,7 +64,7 @@ public class UsuarioServiceImplementado implements UsuarioService {
 	 */
 	@Override
 	public UsuarioDetailDTO obtenerPorId(Long id) {
-		UsuarioEntity entity =repo.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado por id"));
+		UsuarioEntity entity = repo.findById(id).orElseThrow(() -> new NotFoundException("Usuario no encontrado por id"));
 		return modelMapper.map(entity, UsuarioDetailDTO.class);
 	}
 
@@ -93,7 +93,7 @@ public class UsuarioServiceImplementado implements UsuarioService {
 	 */
 	@Override
 	public UsuarioDetailDTO actualizar(Long id, UsuarioUpdateDTO dto, String rol) {
-		UsuarioEntity usuario = repo.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado por actualizar"));
+		UsuarioEntity usuario = repo.findById(id).orElseThrow(() -> new NotFoundException("Usuario no encontrado por actualizar"));
 		
 		boolean esAdmin = "ADMIN".equalsIgnoreCase(rol);
 		
@@ -131,8 +131,8 @@ public class UsuarioServiceImplementado implements UsuarioService {
 		
 		// Solo el admin puede cambiar el rol de un usuario
 		if (esAdmin && dto.getNombreRol() != null) {
-			RolEntity nuevoRol = rolRepo.findByNombreRol(dto.getNombreRol())
-					.orElseThrow(() -> new RuntimeException("Rol no encontrado por nombre"));
+		    RolEntity nuevoRol = rolRepo.findByNombreRol(dto.getNombreRol())
+			    .orElseThrow(() -> new NotFoundException("Rol no encontrado por nombre"));
 			usuario.getConjuntoRoles().clear();
 			usuario.getConjuntoRoles().add(nuevoRol);
 		}
@@ -147,7 +147,7 @@ public class UsuarioServiceImplementado implements UsuarioService {
 	 */
 	@Override
 	public UsuarioDeleteDTO eliminar(Long id) {
-		UsuarioEntity usuario = repo.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado por eliminar"));
+		UsuarioEntity usuario = repo.findById(id).orElseThrow(() -> new NotFoundException("Usuario no encontrado por eliminar"));
 		usuario.setActivo(0);
 		UsuarioEntity save = repo.save(usuario);
 		

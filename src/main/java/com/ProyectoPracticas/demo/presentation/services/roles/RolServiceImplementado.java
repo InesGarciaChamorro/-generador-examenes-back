@@ -3,6 +3,8 @@ package com.ProyectoPracticas.demo.presentation.services.roles;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import com.ProyectoPracticas.demo.presentation.exceptions.NotFoundException;
+import com.ProyectoPracticas.demo.presentation.exceptions.DuplicateException;
 
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolCreateDTO;
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolDeleteDTO;
@@ -53,7 +55,7 @@ public class RolServiceImplementado implements RolService {
 	 */
 	@Override
 	public RolDetailDTO obtenerPorId(Long id) {
-		RolEntity entity = repo.findById(id).orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+		RolEntity entity = repo.findById(id).orElseThrow(() -> new NotFoundException("Rol no encontrado"));
 		return modelMapper.map(entity, RolDetailDTO.class);
 	}
 	
@@ -64,6 +66,9 @@ public class RolServiceImplementado implements RolService {
 	 */
 	@Override
 	public RolCreateResponseDTO crear(RolCreateDTO dto) {
+		if (repo.findByNombreRol(dto.getNombreRol()).isPresent()) {
+			throw new DuplicateException("Rol ya existente");
+		}
 		RolEntity rol = new RolEntity();
         rol.setNombreRol(dto.getNombreRol());
         rol.setActivo(1);
@@ -84,7 +89,7 @@ public class RolServiceImplementado implements RolService {
 	 */
 	@Override
 	public RolDetailDTO actualizar(Long id, RolUpdateDTO dto) {
-		RolEntity rol = repo.findById(id).orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+		RolEntity rol = repo.findById(id).orElseThrow(() -> new NotFoundException("Rol no encontrado"));
 		
 		if (dto.getNombreRol() != null) {
 			rol.setNombreRol(dto.getNombreRol());
@@ -103,7 +108,7 @@ public class RolServiceImplementado implements RolService {
 	 */
 	@Override
 	public RolDeleteDTO eliminar(Long id) {
-		RolEntity rol = repo.findById(id).orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+		RolEntity rol = repo.findById(id).orElseThrow(() -> new NotFoundException("Rol no encontrado"));
 		rol.setActivo(0);
 		repo.save(rol);
 		

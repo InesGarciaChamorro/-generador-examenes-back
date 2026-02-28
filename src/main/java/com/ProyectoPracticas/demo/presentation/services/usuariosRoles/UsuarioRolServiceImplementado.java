@@ -3,6 +3,8 @@ package com.ProyectoPracticas.demo.presentation.services.usuariosRoles;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import com.ProyectoPracticas.demo.presentation.exceptions.NotFoundException;
+import com.ProyectoPracticas.demo.presentation.exceptions.DuplicateException;
 
 import com.ProyectoPracticas.demo.domain.dtos.roles.RolListDTO;
 import com.ProyectoPracticas.demo.domain.dtos.usuariosRoles.UsuarioRolCreateDTO;
@@ -44,19 +46,22 @@ public class UsuarioRolServiceImplementado implements UsuarioRolService{
      */
     @Override
     public UsuarioRolCreateResponseDTO asignarRol(Long idUsuario, UsuarioRolCreateDTO dto) {
+
         UsuarioEntity usuario = usuarioRepo.findById(idUsuario)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+            .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
 
         RolEntity rol = rolRepo.findById(dto.getIdRol())
-                .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+            .orElseThrow(() -> new NotFoundException("Rol no encontrado"));
 
         // Para que no se dupliquen los roles
         boolean yaAsignado = usuario.getConjuntoRoles().stream()
-                .anyMatch(r -> r.getIdRol().equals(rol.getIdRol()));
-        if (!yaAsignado) {
-            usuario.getConjuntoRoles().add(rol);
-            usuarioRepo.save(usuario);
+            .anyMatch(r -> r.getIdRol().equals(rol.getIdRol()));
+        if (yaAsignado) {
+            throw new DuplicateException("Rol ya asignado al usuario");
         }
+
+        usuario.getConjuntoRoles().add(rol);
+        usuarioRepo.save(usuario);
 
         UsuarioRolCreateResponseDTO response = new UsuarioRolCreateResponseDTO();
         response.setIdUsuario(usuario.getIdUsuario());
@@ -72,11 +77,12 @@ public class UsuarioRolServiceImplementado implements UsuarioRolService{
      */
     @Override
     public UsuarioRolDeleteDTO quitarRol(Long idUsuario, Long idRol) {
+
         UsuarioEntity usuario = usuarioRepo.findById(idUsuario)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+            .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
 
         rolRepo.findById(idRol)
-                .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+            .orElseThrow(() -> new NotFoundException("Rol no encontrado"));
 
         usuario.getConjuntoRoles().removeIf(r -> r.getIdRol().equals(idRol));
         usuarioRepo.save(usuario);
